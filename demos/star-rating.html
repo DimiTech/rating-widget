@@ -3,19 +3,85 @@
 <head>
     <meta charset="utf-8">
     <title>Rating Widget - Star Rating Example</title>
+    
+    <!-- Just some rough styling -->
+    <style type="text/css">
+        html {
+            font-family: Georgia, serif;
+        }
+        body {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        label {
+            display: block;
+        }
+        .rating-widget span {
+
+        }
+    </style>
 </head>
 <body>
 
     <h1>Rating Widget - Star Rating Example</h1>
 
+    <div id="post-results">
+        <h3></h3>
+        <pre></pre>
+    </div>
+
+    <form action="" method="POST">
+        <label for="rating">Please rate this item:</label>
+        <input type="number" name="rating" id="rating">
+        <input type="number" name="rating" id="rating2">
+        <input type="number" name="rating" id="rating3">
+        <button type="submit">Submit!</button>
+    </form>
+
+    <!-- Scripts -->
     <script type="text/javascript" src="../dist/rating-widget.min.js"></script>
+
     <script type="text/javascript">
+        // Display the POST request.
+        var form = document.querySelector('form');
+        var resultsDisplay = document.getElementById('post-results');
+        var ratingInput  = document.getElementById('rating');
+        var ratingInput2 = document.getElementById('rating2');
+        var ratingInput3 = document.getElementById('rating3');
+
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            resultsDisplay.querySelector('h3').textContent = 'POST results:';
+            resultsDisplay.querySelector('pre').innerHTML  =   '<em>Rating 1:</em> ' + ratingInput.value;
+            resultsDisplay.querySelector('pre').innerHTML += '\n<em>Rating 2:</em> ' + ratingInput2.value;
+            resultsDisplay.querySelector('pre').innerHTML += '\n<em>Rating 3:</em> ' + ratingInput3.value;
+        });
+
+        // Create a rating widget.
         var options = {
-            maxRating: 4,
-            initialRating: 2
+            inputElement: ratingInput,
+            maxRating: 18,
+            initialRating: 2,
+            svgEmpty: '../dist/svg/star-empty.svg', // SVG path relative to the 'rating-widget.js' file.
+            svgFilled: '../dist/svg/star-filled.svg',
+            size: 15
         };
         var starRating = new RatingWidget(options);
-        console.log(starRating);        
+        
+        var starRating2 = new RatingWidget({
+            inputElement: ratingInput2,
+            maxRating: 5,
+            initialRating: 1
+        });
+
+        var starRating3 = new RatingWidget({
+            inputElement: ratingInput3,
+            maxRating: 10,
+            initialRating: 5
+        });
+
     </script>
 </body>
 </html>
