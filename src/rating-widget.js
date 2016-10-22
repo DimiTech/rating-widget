@@ -4,16 +4,22 @@
     
     // The constructor.
     var RatingWidget = function(options) {
+        this.elements     = {}; // Will hold the DOM elements that make up the widget.
         this.minRating    = 0;
         this.maxRating    = options.maxRating || 5;
         this.size         = options.size      || 30; // In pixels.
-        this.value        = options.inputElement.value = options.initialRating || 0; // This expression gets evaluated from right to left.
+        this.elements.inputElement = options.inputElement[0] || options.inputElement; // Short-circuiting makes it work with jQuery.
+        
+        if (options.initialRating) {
+            this.value = options.initialRating;
+        } else {
+            this.value = this.elements.inputElement.value || 0;
+        }
 
-        this.elements              = {}; // Will hold the DOM elements that make up the widget.
-        this.elements.inputElement = options.inputElement;
         this.svgEmpty              = options.svgEmpty  || '../dist/svg/star-empty.svg';
         this.svgFilled             = options.svgFilled || '../dist/svg/star-filled.svg';
-        
+        this.elements.inputElement.value = this.value;
+
         constructWidget(this);
         setEventListeners(this);
     };

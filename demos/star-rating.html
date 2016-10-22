@@ -17,9 +17,6 @@
         label {
             display: block;
         }
-        .rating-widget span {
-
-        }
     </style>
 </head>
 <body>
@@ -34,13 +31,14 @@
     <form action="" method="POST">
         <label for="rating">Please rate this item:</label>
         <input type="number" name="rating" id="rating">
-        <input type="number" name="rating" id="rating2">
+        <input type="number" name="rating" id="rating2" value="3">
         <input type="number" name="rating" id="rating3">
         <button type="submit">Submit!</button>
     </form>
 
     <!-- Scripts -->
     <script type="text/javascript" src="../dist/rating-widget.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <script type="text/javascript">
         // Display the POST request.
@@ -48,15 +46,14 @@
         var resultsDisplay = document.getElementById('post-results');
         var ratingInput  = document.getElementById('rating');
         var ratingInput2 = document.getElementById('rating2');
-        var ratingInput3 = document.getElementById('rating3');
 
 
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             resultsDisplay.querySelector('h3').textContent = 'POST results:';
             resultsDisplay.querySelector('pre').innerHTML  =   '<em>Rating 1:</em> ' + ratingInput.value;
-            resultsDisplay.querySelector('pre').innerHTML += '\n<em>Rating 2:</em> ' + ratingInput2.value;
-            resultsDisplay.querySelector('pre').innerHTML += '\n<em>Rating 3:</em> ' + ratingInput3.value;
+            resultsDisplay.querySelector('pre').innerHTML += '\n<em>Rating 2:</em> ' + starRating2.value;
+            resultsDisplay.querySelector('pre').innerHTML += '\n<em>Rating 3:</em> ' + starRating3.elements.inputElement.value;
         });
 
         // Create a rating widget.
@@ -73,11 +70,11 @@
         var starRating2 = new RatingWidget({
             inputElement: ratingInput2,
             maxRating: 5,
-            initialRating: 1
+            size: 40
         });
 
         var starRating3 = new RatingWidget({
-            inputElement: ratingInput3,
+            inputElement: $('#rating3'),
             maxRating: 10,
             initialRating: 5
         });
