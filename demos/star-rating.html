@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rating Widget - Star Rating Example</title>
+</head>
+<body>
+
+    <h1>Rating Widget - Star Rating Example</h1>
+
+    <script type="text/javascript" src="../dist/rating-widget.min.js"></script>
+    <script type="text/javascript">
+        var options = {
+            maxRating: 4,
+            initialRating: 2
+        };
+        var starRating = new RatingWidget(options);
+        console.log(starRating);        
+    </script>
+</body>
+</html>
